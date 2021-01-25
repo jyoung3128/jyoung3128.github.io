@@ -3,15 +3,32 @@
 // triangles ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function triangles() {
-
+function triangles(n, i) {
+  //set your i variable to the value you want to accumulate 7 times
+  //since it's a string we can use it's length against 8 to console.log it 7 times
+  //then update each loop with another hastag and console.log that thang
+  //so should work for any given starting number and any given ending number 
+  //also since we using .length have to say less or equal to 
+  for (var i = '#'; i.length <= n; i += '#'){
+    console.log(i);
+  }
 }
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 function fizzBuzz() {
-  
+  for (let i = 1; i <= 15; i++){
+    if (i % 3 === 0 && i % 5 === 0){
+      console.log("fizzbuzz");
+    } else if (i % 3 === 0){
+      console.log("fizz");
+    } else if (i % 5 === 0){
+      console.log("buzz");
+    } else {
+      console.log(i);
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

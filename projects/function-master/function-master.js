@@ -208,15 +208,21 @@ return object;
 //////////////////////////////////////////////////////////////////////
 //Should take an array and return an array with all the duplicates removed
 //the array containing duplicates
+/*
+QUnit.test( "dedup() : Should take an array and return an array with all the duplicates removed", function( assert ) {
+      var arrayOne = [1,2,2,2,3,4,5,5,5,5,"a","b","b","b","c"];
+      var arrayTwo = ["hello", "hello", "hello", "hello", "hello", "world", "hello", "world", "world", "world"];
+      assert.deepEqual(dedup(arrayOne), [1,2,3,4,5,"a","b","c"]);
+      assert.deepEqual(dedup(arrayTwo), ["hello", "world"]);
+    });
+*/
 function dedup(array) {
-
-return array.reduce(function(noDupArr, arrEl){
-    if (!noDupArr[arrEl]){
-        noDupArr.push(arrEl)
-    } else {
-    
-    }
-}, [])
+return array.filter(function(val, index){
+    //var arrayOne = [1,2,2,2,3,4,5,5,5,5,"a","b","b","b","c"];
+    //if the index of the value is equal to the index we on then it will pass the test func and filter the array
+    //when it gets to the 2nd 2 in arrayOne it will fail the test bc we already established value 2 is at index 1 not index 2
+   return array.indexOf(val) === index;
+});
 }
 
 //////////////////////////////////////////////////////////////////////
