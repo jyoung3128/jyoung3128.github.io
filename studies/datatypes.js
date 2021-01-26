@@ -60,6 +60,10 @@ add(5, 3); //will  call the function passing in the ARGUMENTS five and three and
 //UNDEFINED EXAMPLE
 var x; //here we have an example of undefined where we declared a variable but then never assigned it a value ourselves HOWEVER javascript gives it the value of undefined 
 
+//NULL EXAMPLE - While undefined recognizes a variable exist null is the absence of data
+null == undefined; //true
+null === undefined; //false
+
 //NaN EXAMPLE - NaN stands for Not a Number and is a value in javascript that identifies non number datatypes from numbers
 var num = 6;
 var nonNum = 'hey';

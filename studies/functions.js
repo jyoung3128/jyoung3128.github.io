@@ -10,10 +10,20 @@
  * till we act upon it. The way we act upon a function is by calling it.
  * This will be easier to visualize with some examples.
  * 
- *
+ * When we think of parameters and arguments in Javascript we want to imagine the car factory analogy
+ * When building a car making function we want the parameters to satisfy the build of any car we need to manufacture
+ * We don't want to specifically make a toyota function with parameters that only take in stuff for toyota
+ * because we are a car factory for all cars. Your parameters need to be general so that your arguments 
+ * can be for any car. Below we have the adder function which has two parameters: x and y
+ * x and y are general enough that we can put in two numbers and add them or even two strings and concatenate them.
+ * The strings and numbers would be the actual arguments we are passing in.
  * 
+ * Function declarations are hoisted to the top of the scope before code execution so this allows us to invoke the function wherever 
+ * we want in our code. Down below we have an adder function declaraton that when invoked adds the to input numbers.
+ * Whether I invoke it above or below the function does not matter since it's hoisted.
  *
- *
+ * Function expressions on the other hand are not hoisted to the top so we cannot invoke where we please but have to
+ * after the function was established
  *
  */
 

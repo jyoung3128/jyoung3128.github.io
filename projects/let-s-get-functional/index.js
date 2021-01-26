@@ -132,12 +132,27 @@ function(array, letter){
 var friendFirstLetterCount = function(array, customer, letter){
     //so far im using reduce to keep track of total friend letters with the seed starting at zero and then loop thru friends since it's an array 
     //then if customer(object in array).friends(array within object)[i](every element in the array).name[0](access name key value and zeroeth index is first letter) if that equals the letter increase the total Friend Letter count
-    
-    
+    // start with reduce that takes in an accumulator and the elements which are objects
+    let friendCount = _.reduce(array, function(acc, customerObj) {
+        //if customerObj's name is equal to the customer your passing in
+        if (customerObj.name.toLowerCase() === customer.toLowerCase() ) {
+            //set the acc equal to filter which then takes in the customerObjs.friends (an array to filter thru) and the element
+            acc = _.filter(customerObj.friends, function(e) {
+                //already has an if statement so just return the element name at zero index the first letter and compare it to letter 
+                //both lowercase
+             return  e.name[0].toLowerCase() === letter.toLowerCase();
+          });
+        }
+        //return the accumulator
+        return acc;
+    }, 0);
+    //then we want the first letter count so return the length of the filtered array
+    return friendCount.length;
+};
     
     //so far im using reduce to keep track of total friend letters with the seed starting at zero and then loop thru friends since it's an array 
     //then if customer(object in array).friends(array within object)[i](every element in the array).name[0](access name key value and zeroeth index is first letter) if that equals the letter increase the total Friend Letter count
-
+/*
 var friendCount = 0;
 for (var i = 0; i < array.length; i++){
   if (array[i].name === customer){
@@ -151,35 +166,21 @@ for (var i = 0; i < array.length; i++){
   return friendCount;
 
 };
+   */ 
     
-    /*
- var friendLetterCount =  _.reduce(array, function(totalFLetters, customer){
-    for (let i = 0; i < customer.friends.length; i++){
-        if (customer.friends[i].name[0].toLowerCase() === letter.toLowerCase()){
-           totalFLetters++;
+
+// Find the customers’ names that have a given customer’s name in their friends list
+var friendsCount = function(array, name){
+    _.reduce(array, function(finalArr, customerObj){
+        if (customerObj.friends.name){
+            finalArr.push(customerObj.name);
         }
-        
-    }
-    return totalFLetters;
-    }, 0);
-    return friendLetterCount;
-    */
-    /*
- let filteredFriends = _.filter(array, function(e){
-     //if the element we are on is the same as the customer we are passing in
-     if (e.name === customer.name){
-        _.each(e.friends, function(f){
-            if (f.name[0].toLowerCase() === letter.toLowerCase()){
-                return true;
-            }
+        return finalArr = _.filter(customerObj.friends, function(e){
+            return e.name
         })
-     }
- })
- return filteredFriends.length;
- */
-
-
-var friendsCount;
+    }, [])
+   
+}
 
 var topThreeTags;
 
