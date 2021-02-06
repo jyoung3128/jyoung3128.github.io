@@ -26,8 +26,24 @@ function every() {
 // dominantDirection ///////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////
 
-function dominantDirection() {
-
+function dominantDirection(str) {
+  const arr = countBy(str, function(char){
+    //get the unicode value for the current character
+    const unicode = char.charCodeAt();
+    //find the script object from the unicode character
+    const script = characterScript(unicode);
+    //returning the name of the script direction or null
+    if (script !== null){
+      return script.direction;
+    } else {
+      return script;
+    }
+  });
+  
+  arr.sort(function(a, b){
+    return b.count - a.count;
+  });
+  return arr[0].name;
 }
 
 // /////////////////////////////////////////////////////////////////////////////

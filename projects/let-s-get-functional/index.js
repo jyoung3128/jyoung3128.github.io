@@ -27,7 +27,7 @@ var maleCount = function(array) {
             
         
     });
-   
+   //since filter returns an array and we need a count use the length method to get the number value
      return maleNumbers.length; 
     
 };
@@ -48,7 +48,7 @@ var oldestCustomer = function(array){
     let oldie = _.reduce(array, function(oldFolk, customerObj){
         if (oldFolk.age > customerObj.age){
             //return the whole object to compare so u can then reaccess the age
-            //I was trying to do oldFolk.name but Darnell was like don't worry till the end and that makes so much since
+            //I was trying to do oldFolk.name but Darnell was like don't worry till the end and that makes so much sense
             return oldFolk;
         }
         return customerObj;
@@ -170,21 +170,93 @@ for (var i = 0; i < array.length; i++){
     
 
 // Find the customers’ names that have a given customer’s name in their friends list
-var friendsCount = function(array, name){
-    _.reduce(array, function(finalArr, customerObj){
-        if (customerObj.friends.name){
-            finalArr.push(customerObj.name);
+//input: array, customer name who we want to find is friends with
+//everyone else
+
+
+//output: is an array of everyone else
+var friendsCount = function(array, customer){
+    //create result that will hold an array with the customer objects of each valid customer
+    let resultArr = _.filter(array, function(customerObj){                 //it's interesting cause the data suggests their friendship goes one way
+                                                                           //Like Olga doesn't have Doyle in her friend's list
+        // lets define the friends array                                  //Doyle Erickson has Olga in his friends list so we return him and pluck his name
+        let customerObjsFriendsArr = customerObj.friends;
+        //look through each friends array and see if the customer is inside of it
+        for (let i = 0; i < customerObjsFriendsArr.length ; i++){
+            //check if current friend is equal to customer
+            if (customerObjsFriendsArr[i].name === customer){
+                return customerObj;
+            }
         }
-        return finalArr = _.filter(customerObj.friends, function(e){
-            return e.name
-        })
-    }, [])
-   
-}
+    });
+    return _.pluck(resultArr, "name");
+};
+//find three most common tags among all customers' associated tags
+//input: array
+//output: array
+var topThreeTags = function (array){
+    //in underscore.js pluck shows them grabbing a key from an array of objects which is exactly
+    //what we are dealing with so I'll use their logic
+    //now we have the tags for each object in an array; an array with an array of tags at each index
+    let tags = _.pluck(array, "tags");
+    
+    let tagsJoined = tags.join(',');
+    //console.log(tagsJoined);
+    //joins all the words together seperated by commas
+    let splitTags = tagsJoined.split(','); //back into array 
+    //console.log(splitTags); //now we have all the tags in a single array separated by commas
+    //pass this into reduce to get the count for each in key value pairs
+    //by doing this we can have an object that will show us by number which is the top tag
+    
+    let tagCount = _.reduce(splitTags, function(tagCountObj, currentTag){
+        if (tagCountObj[currentTag]){
+            tagCountObj[currentTag]++
+        } else {
+            tagCountObj[currentTag] = 1;
+        }
+        return tagCountObj;
+    }, {})
+    //console.log(tagCount); //has all the tags with their count in an object
+    //set an array to push the object key and values in
+    let finalArr = [];
+    //look through the tags so we can pass each tag and each number
+    for (var key in tagCount){
+        //why do you need the box to go around both?
+        finalArr.push([key, tagCount[key]]);
+    }
+    //console.log(finalArr) got all key value pairs in their own array in the array BUT we want to bring the top 3 to the top
+    //here comes tutoring to the rescue
+    let sortedTags = finalArr.sort(function(a, b){
+        return b[1] - a[1];
+    });
+    
+    let top3Tags = sortedTags.slice(0, 3);
+    //now it's sorted but we don't need the numbers anymore so map and just get the tags
+    let justTags = top3Tags.map(function(taggies){
+        return taggies[0];
+    });
+    console.log(justTags);
+    return justTags;
+    //WOW WHAT THE HECK MAN THIS IS A LOGICAL PUZZLE
+};
 
-var topThreeTags;
-
-var genderCount;
+//HOLY CRAP I DID IT 8:38 A<
+var genderCount = function(array){
+    //so we want to return an object with genders so name it appropriately
+    //finalObj will be an empty object seed and currentObj will be each object element in the data
+    let genderObj = _.reduce(array, function(finalObj, currentObj){
+        //if finalObj contains the current Object's gender
+        if (finalObj[currentObj.gender]){
+            //then increase the count by 1
+            finalObj[currentObj.gender]++;
+            //else it has not seen this gender yet so add it and set the count to 1
+        } else {
+            finalObj[currentObj.gender] = 1;
+        } //finally return that object then return the variable and boom! You got an object full of gender's and their proper count
+        return finalObj;
+    }, {});
+    return genderObj;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
