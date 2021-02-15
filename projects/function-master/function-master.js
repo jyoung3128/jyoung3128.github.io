@@ -11,11 +11,16 @@ return Object.values(object);
 //////////////////////////////////////////////////////////////////////
 
 function keysToString(object) {
+let arrKeys = Object.keys(object);
+let string = arrKeys.join(' ');
+return string;
+/*
   var  str = '';
 for (var key in object){
  str += ' ' + key;
 }
 return str.slice(1);
+*/
 }
 
 //////////////////////////////////////////////////////////////////////

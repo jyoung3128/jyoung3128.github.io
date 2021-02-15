@@ -20,6 +20,7 @@ function triangles(n, i) {
 function fizzBuzz() {
   for (let i = 1; i <= 15; i++){
     if (i % 3 === 0 && i % 5 === 0){
+      //if it divides cleanly into 3 or 5 do fizzbuzz you want this to be first so it doesn't log fizz or buzz instead 
       console.log("fizzbuzz");
     } else if (i % 3 === 0){
       console.log("fizz");
@@ -35,8 +36,24 @@ function fizzBuzz() {
 // drawChessboard //////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function drawChessboard() {
-
+function drawChessboard(num) {
+  let size = num; 
+let board = ""; 
+//creat a loop in order to access each space of the board
+for (var y = 0; y < size; y++) {
+  for (var x = 0; x < size; x++) {
+    //if the sum of x and y cleanly divides by 2 add a space to the board
+    if ((x + y) % 2 == 0) {   
+      board += " ";
+    } else {
+      //otherwise a hashtag
+      board += "#";
+    }
+  }
+  //outside the x for loop but inside the y loop add a new line via "\n"
+  board += "\n";  // 
+}
+console.log(board);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

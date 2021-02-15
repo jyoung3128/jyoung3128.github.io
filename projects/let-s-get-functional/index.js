@@ -240,7 +240,7 @@ var topThreeTags = function (array){
     //WOW WHAT THE HECK MAN THIS IS A LOGICAL PUZZLE
 };
 
-//HOLY CRAP I DID IT 8:38 A<
+//HOLY CRAP I DID IT 8:38 AM
 var genderCount = function(array){
     //so we want to return an object with genders so name it appropriately
     //finalObj will be an empty object seed and currentObj will be each object element in the data
